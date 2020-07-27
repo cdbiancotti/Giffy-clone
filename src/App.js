@@ -1,26 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import ListOfGifs from './Components/ListOfGifs';
+import { Link, Route } from 'wouter';
 
-function App() {
+const App = () => {
+  const [keyword, setKeyword] = useState('');
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <section className='App-content'>
+        <input value={keyword} onChange={(e) => setKeyword(e.target.value)}></input>
+        <Link to={`/gif/${keyword}`}>Buscar</Link>
+        <Route path='/gif/:keyword' component={ListOfGifs} />
+        {/* <ListOfGifs keyword={keyword} /> */}
+      </section>
     </div>
   );
-}
+};
 
 export default App;
